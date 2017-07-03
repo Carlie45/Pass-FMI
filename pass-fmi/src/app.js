@@ -40,7 +40,8 @@ class App extends Component {
         <hr />
         <Route path="/" component={BaseTemplate} />
         <Route path="/home" component={Home} />
-        <Route path="/intro" render={() => <div>How to start using this app</div>} />
+        <Route exact path="/intro" render={() => <div>How to start using this app</div>} />
+        <Route path="/intro/:id" render={() => <div>How to start using 123 app</div>} />
         <Route path="/repos" component={Repos} />
         <Route path="/topics" component={Topics} />
         <Route path="/about" component={About} />
