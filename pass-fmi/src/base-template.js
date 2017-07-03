@@ -10,10 +10,9 @@ class BaseTemplate extends Component {
       <div className="base">
         <div className="base-header">
           <img src={logo} className="base-logo" alt="logo" />
-          <h2>Welcome Bibi</h2>
+          <h2>Pass FMI</h2>
         </div>
         <p className="base-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
         </p>
       </div>
     );

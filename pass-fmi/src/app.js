@@ -4,15 +4,21 @@ import './index.css';
 import './app.css';
 import { Route } from 'react-router';
 import { Link } from 'react-router-dom';
+import { browserHistory, Router } from 'react-router'
+import createBrowserHistory from 'history/createBrowserHistory'
 import BaseTemplate from './base-template';
 import Home from './components/home';
 import About from './components/about';
-import Repos from './components/repos';
+import UserData from './components/personal';
+import Items from './components/items';
+import ItemDetails from './components/item-details';
 import Topics from './components/topics';
 import ShowTheLocation from './components/show-location'
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 import {withRouter} from 'react-router';
+
+let history = createBrowserHistory();
 
 @withRouter
 @connect()
@@ -25,25 +31,22 @@ class App extends Component {
     return (
       <div>
         <ul className="main-menu">
-          <li><Link to="/home">Homeee</Link></li>
-          <li><Link to="/intro">Intro</Link></li>
-          <li><Link to="/repos">Repos</Link></li>
+          <li><Link to="/home">Начало</Link></li>
+          <li><Link to="/about">Мисия</Link></li>
+          <li><Link to="/personal">Лични данни</Link></li>
+          <li><Link to="/items">Учебни материали</Link></li>
           <li><Link to="/topics">Topics</Link></li>
           <li><Link to="/show-location">Show the Location</Link></li>
-          <li><Link to="/about">About</Link></li>
-          <form className="navbar-form navbar-right" role="search" onSubmit={this.handleSerch}>
-            <input type="text" placeholder="userName" className="form-control" /> / {' '}
-            <input type="text" placeholder="repo" className="form-control" />{' '}
-            <button type="submit" className="btn btn-default">Go</button>
-          </form>
         </ul>
         <hr />
+        <Router history={history}/>
         <Route path="/" component={BaseTemplate} />
         <Route path="/home" component={Home} />
-        <Route path="/intro" render={() => <div>How to start using this app</div>} />
-        <Route path="/repos" component={Repos} />
-        <Route path="/topics" component={Topics} />
         <Route path="/about" component={About} />
+        <Route path="/personal" component={UserData} />
+        <Route path="/items" exact component={Items} />
+        <Route path="/items/:itemId" component={ItemDetails} />
+        <Route path="/topics" component={Topics} />
         <Route path="/show-location" component={ShowTheLocation} />
       </div>
     );
