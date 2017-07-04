@@ -1,6 +1,6 @@
 import React from 'react';
 import { Redirect } from 'react-router'
-
+import { withRouter } from 'react-router-dom'
 class Item extends React.Component {
 
     constructor(props) {
@@ -42,12 +42,29 @@ class Item extends React.Component {
         // }
 
        return (
-        <tr onClick={() => this.handleClick(this.props.item.id)}>
-            <td> {this.props.item.title}</td>
+        <tr onClick={() => this.handleClick(this.props.item._id)}>
+            { this.props.item.title && <td> {this.props.item.title}</td>}
             <td> {this.props.item.subject}</td>
-            <td> {this.props.item.author}</td>
+            {this.props.item.user && <td> {this.props.item.user.username}</td>}
+            {!this.props.item.user && <td> Anonymous </td>}
         </tr>
     )}
 }
 
-export default Item;
+// export default Item;
+export default withRouter(Item);
+/*=======
+import { withRouter } from 'react-router-dom'
+
+const Item = ({item}) => { return (
+    // <tr onClick={ () => {this.context.router.transitionTo('/items/' + item.id)}}>
+    <tr key={item.id}>
+        {item.title && <td>{item.title}</td>}
+        <td> {item.subject}</td>
+        {item.user && <td> {item.user.username}</td>}
+        {!item.user && <td> Anonymous </td>}
+    </tr>
+);}
+
+export default withRouter(Item);
+>>>>>>> cb7436b3aa12f572714b5a4c8d0bdf60550d2b5b*/

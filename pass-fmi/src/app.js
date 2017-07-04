@@ -10,8 +10,8 @@ import BaseTemplate from './base-template';
 import Home from './components/home';
 import About from './components/about';
 import UserData from './components/personal';
-import Items from './components/items';
-import ItemDetails from './components/item-details';
+import Items from './containers/ItemsContainer';
+import ItemDetails from './containers/itemDetailsContainer';
 import Topics from './components/topics';
 import ShowTheLocation from './components/show-location'
 import { connect } from 'react-redux';

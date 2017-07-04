@@ -1,13 +1,17 @@
 import React from 'react';
 import Item from './item';
-import '../../styles/styles.css'; 
+import '../../styles/styles.css';
 
-const ItemsList  = (props) => (
-<tbody>{
-      props.items.map(
-        item => (<Item key={item.id} item={item} />)
-      )}
-</tbody>
-);
+class ItemsList extends React.Component {
+  render() {
+    return (
+      <tbody>{
+            this.props.items.map(
+              item => (<Item key={item._id} item={item} />)
+            )}
+      </tbody>
+    );
+  }
+}
 
 export default ItemsList;

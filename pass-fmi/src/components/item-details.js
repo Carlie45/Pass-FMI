@@ -1,27 +1,29 @@
 import React from 'react';
 import CommentList from './comments-list';
-import '../../styles/styles.css'; 
-
-var itemsArr = require('./items');
+import '../../styles/styles.css';
+import PropTypes from 'prop-types';
 
 class ItemDetails extends React.Component {
+    componentWillMount() {
+        console.log(this.props.actions);
+        this.props.actions.getItems();
+    }
 
     constructor(props) {
         super(props);
         this.state = {
-            items: itemsArr.items,
             newCommentText: 'Добавете коментар...'
         }
     }
-
+    
     getItemIndex = () => {
         let endInd = window.location.href.lastIndexOf('/');
+        console.log(this.props);
         return window.location.href.substring(endInd+1);
     }
 
     handleChange = (e) => {
-        this.setState({newCommentText: e.target.value,
-                        items: this.state.items});
+        this.setState({newCommentText: e.target.value});
     }
 
     handleAddComment = (e) => {
@@ -35,30 +37,29 @@ class ItemDetails extends React.Component {
         const seconds = date.getSeconds();
         let dateStr = day + "." + month + "." + year + " " + hours + ":" + minutes + ":" + seconds;
         let newComment = {date: dateStr, username: "Guest", text: this.state.newCommentText};
-        itemsArr.items[this.getItemIndex()-1].comments.push(newComment);
+        this.props.items[this.getItemIndex()].comments.push(newComment);
 
-        this.setState({ items: itemsArr.items,
-                        newComment: this.state.newCommentText});
+        this.setState({newComment: this.state.newCommentText});
     }
 
     render() {
         return(
             <div>
-                <div className="item-title">{itemsArr.items[this.getItemIndex()-1].title}</div>
+                <div className="item-title">{this.props.items[this.getItemIndex()].title}</div>
 
                 <table className="item-details-table">
                     <tbody>
                         <tr>
                             <td className="item-details-label">Автор:</td>
-                            <td className="item-details-value">{itemsArr.items[this.getItemIndex()-1].author}</td>
+                            <td className="item-details-value">{this.props.items[this.getItemIndex()].author}</td>
                         </tr>
                         <tr>
                             <td className="item-details-label">Предметна област:</td>
-                            <td className="item-details-value">{itemsArr.items[this.getItemIndex()-1].subject}</td>
+                            <td className="item-details-value">{this.props.items[this.getItemIndex()].subject}</td>
                         </tr>
                         <tr>
                             <td className="item-details-label">Катедра:</td>
-                            <td className="item-details-value">{itemsArr.items[this.getItemIndex()-1].department}</td>
+                            <td className="item-details-value">{this.props.items[this.getItemIndex()].department}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -66,22 +67,22 @@ class ItemDetails extends React.Component {
                     <tbody>
                         <tr>
                             <td className="author-details-label">Добавил:</td>
-                            <td className="author-details-value">{itemsArr.items[this.getItemIndex()-1].username}</td>
+                            <td className="author-details-value">{this.props.items[this.getItemIndex()].username}</td>
                         </tr>
                         <tr>
                             <td className="author-details-label">Телефон:</td>
-                            <td className="author-details-value">{itemsArr.items[this.getItemIndex()-1].phone}</td>
+                            <td className="author-details-value">{this.props.items[this.getItemIndex()].phone}</td>
                         </tr>
                         <tr>
                             <td className="author-details-label">e-mail:</td>
-                            <td className="author-details-value">{itemsArr.items[this.getItemIndex()-1].email}</td>
+                            <td className="author-details-value">{this.props.items[this.getItemIndex()].email}</td>
                         </tr>
                     </tbody>
                 </table>
-                <div className="item-details-price">Цена: {itemsArr.items[this.getItemIndex()-1].price}</div>
+                <div className="item-details-price">Цена: {this.props.items[this.getItemIndex()].price}</div>
                 <br/>
                 <h3 className="item-title">Коментари</h3>
-                <CommentList comments={itemsArr.items[this.getItemIndex()-1].comments}/>
+                <CommentList comments={this.props.items[this.getItemIndex()].comments}/>
                 <div className="add-comment-section">
                     <textarea className="add-comment-textarea" name="add-comment-area" onChange={this.handleChange} form="add-comments-form" value={this.state.newCommentText}></textarea>
                     <form id="add-comments-form" onSubmit={this.handleAddComment}>
@@ -91,6 +92,13 @@ class ItemDetails extends React.Component {
             </div>
         );
     }
+}
+
+ItemDetails.propTypes = {
+  actions: PropTypes.shape({
+    getItems: PropTypes.func.isRequired
+  }),
+  items: PropTypes.array
 }
 
 export default ItemDetails;

@@ -1,14 +1,12 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import ItemsList from './items-list';
+import PropTypes from 'prop-types';
 
 class Items extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { items: [{id: 1, title: 'Test 1', subject: 'Math', author: 'White Rose'},
-                           {id: 2, title: 'Test 2', subject: 'Math', author: 'White Rose'}]};
+  componentWillMount() {
+    this.props.actions.getItems();
   }
-  
+
   render() {
     return (
       <div className="container">
@@ -17,18 +15,22 @@ class Items extends React.Component {
             <thead>
             <tr>
                 <th className="items-header">Заглавие</th>
-                <th className="items-header">Предметна област</th> 
+                <th className="items-header">Предметна област</th>
                 <th className="items-header">Добавил</th>
             </tr>
             </thead>
-            <ItemsList items={this.state.items} />
+            <ItemsList items={this.props.items} />
         </table>
       </div>
     );
   }
 }
 
-export default connect()(Items);
-exports.items = [{id: 1, title: 'Test 1', subject: 'Math', author: 'White Rose', department: 'Linear Mathematics', price:'5лв', username: 'pepi01', phone: '123', email: 'pepi@abv.bg',
-                  comments: [{id: 1, username: 'hacker1', text: 'the book sucks', date: '20.02.2017'}]},
-                {id: 2, title: 'Test 2', subject: 'Math', author: 'White Rose', department: 'Linear Mathematics',price:'5лв', username: 'pepi01', phone: '123', email: 'pepi@abv.bg'}]
+Items.propTypes = {
+  actions: PropTypes.shape({
+    getItems: PropTypes.func.isRequired
+  }),
+  items: PropTypes.array
+}
+
+export default Items;
