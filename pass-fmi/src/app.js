@@ -4,7 +4,7 @@ import './index.css';
 import './app.css';
 import { Route } from 'react-router';
 import { Link } from 'react-router-dom';
-import { browserHistory, Router } from 'react-router'
+import { Router } from 'react-router'
 import createBrowserHistory from 'history/createBrowserHistory'
 import BaseTemplate from './base-template';
 import Home from './components/home';

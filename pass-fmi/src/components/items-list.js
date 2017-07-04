@@ -10,6 +10,4 @@ const ItemsList  = (props) => (
 </tbody>
 );
 
-
-
 export default ItemsList;

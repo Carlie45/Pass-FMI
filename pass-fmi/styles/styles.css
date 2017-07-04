@@ -18,3 +18,85 @@
     font-size: 20px;
     height: 35px;
 }
+
+.item-title {
+    font-size: 25px;
+    font-weight: bold;
+    padding: 30px;
+}
+
+.item-details-table {
+    width: 50%;
+    border: 2px;
+    display: inline-block;
+}
+
+.item-details-label {
+    font-size: 20px;
+    font-weight: bold;
+    width: 20%;
+    background-color: #aef9f9;
+    padding-top: 5px;
+    padding-right: 30px;
+    padding-bottom: 5px;
+    padding-left: 30px;
+}
+
+.item-details-value {
+    font-size: 20px;
+    background-color:#e3fcfc;
+    width: 30%;
+    padding-top: 5px;
+    padding-right: 30px;
+    padding-bottom: 5px;
+    padding-left: 30px;
+}
+
+.author-details-table {
+    width: 50%;
+    display: inline-block;
+    border: 2px;
+}
+
+.author-details-label {
+    font-size: 20px;
+    width: 20%;
+    font-weight: bold;
+    background-color: #a8adad;
+    padding-top: 5px;
+    padding-right: 0px;
+    padding-bottom: 5px;
+    padding-left: 30px;
+}
+
+.author-details-value {
+    font-size: 20px;
+    width: 30%;
+    background-color:#d9dddd;
+    padding-top: 5px;
+    padding-right: 0px;
+    padding-bottom: 5px;
+    padding-left: 30px;
+}
+
+.comment-text {
+    font-size: 15px;
+}
+
+.item-details-price {
+    font-size: 20px;
+    width: 50%;
+    font-weight: bold;
+    padding-top: 5px;
+    padding-right: 0px;
+    padding-bottom: 5px;
+    padding-left: 30px;
+}
+
+.add-comment-section {
+    padding: 20px;
+}
+
+.add-comment-textarea {
+    width: 50%;
+}
