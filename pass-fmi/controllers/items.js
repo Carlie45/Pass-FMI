@@ -6,7 +6,7 @@ const Comment = require('../models/comments');
 const User = require('../models/users');
 
 router.get('/itemsList', function(req, res) {
-  Item.find().deepPopulate('comments.author').exec(function (err, items) {
+  Item.find().deepPopulate('user comments.author').exec(function (err, items) {
     if(items) {
       res.status(200).json(items);
     }
@@ -22,6 +22,8 @@ router.post('/', function(req, res) {
   item.user = req.body.userId;
   item.subject = req.body.subject;
   item.department = req.body.department;
+  item.title = req.body.title;
+  item.price = req.body.price;
   item.comments = [];
 
   Item.create(item).then(item => {
@@ -61,8 +63,40 @@ router.get('/subjects',function(req, res){
   });
 });
 
+router.post('/addComment/:itemId', function(req, res) {
+  username = req.body.username;
+
+  User.findOne({username: username}).then((user) => {
+    let comment = {};
+    comment.author = user._id;
+    comment.content = req.body.content;
+
+    Item.findById(req.params.itemId).then((item) => {
+      Comment.create(comment).then(comment => {
+        item.comments = item.comments.concat(comment._id)
+
+        Item.update({_id: item._id}, item).then((updatedItem) => {
+          Item.findById({_id: item._id}).deepPopulate('user comments.author').exec(function (err, item) {
+            if(item) {
+              res.status(200).json(item);
+            }
+            else {
+              res.status(404).send('Item not found!');
+            }
+          });
+        }).catch((error) => {
+          res.status(404).send(error);
+        })
+      })
+    }).catch(() => {
+      res.status(404).send('Item doesn\'t exist');
+    })
+  }).catch(() => {
+    res.status(404).send('User not found!');
+  })
+});
 router.get('/:id', function(req, res) {
-  Item.findById({_id: req.params.id}).deepPopulate('comments.author').exec(function (err, item) {
+  Item.findById({_id: req.params.id}).deepPopulate('user comments.author').exec(function (err, item) {
     if(item) {
       res.status(200).json(item);
     }

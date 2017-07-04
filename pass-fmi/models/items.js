@@ -16,6 +16,11 @@ let itemsSchema = new Schema({
     type: String,
     required: true
   },
+  title: {
+    type: String,
+    required: true
+  },
+  price: Number,
   department: String,
   comments: [{
     type: Number,
