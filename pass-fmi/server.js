@@ -1,12 +1,15 @@
 const express = require('express');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
-
+const connect = require('connect')
 const app = express();
 
-var mongoose = require('mongoose');
-mpromise = require('mpromise');
+const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy;
+const mongoose = require('mongoose');
 const assert = require('assert');
+
+
 mongoose.connect('mongodb://localhost/test');
 mongoose.Promise = global.Promise;
 
@@ -17,6 +20,10 @@ app.use(bodyParser.urlencoded({
   limit: '50mb',
 }));
 
+var expressSession = require('express-session');
+app.use(expressSession({secret: 'lkajsdlkajsdljasdlkj123kas', keys: ['asdasd','2aslhdasd1']}));
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Credentials', true);
@@ -33,6 +40,14 @@ app.use((req, res, next) => {
   res.header('Access-Control-Allow-Methods', 'POST, GET, PUT, DELETE');
   next();
 });
+
+// var cookieParser = require('cookie-parser');
+// app.use(cookieParser());
+var User = require('./models/users');
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
 
 app.use('/api', require('./controllers'));
 

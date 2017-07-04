@@ -4,13 +4,13 @@ import './index.css';
 import './app.css';
 import { Route } from 'react-router';
 import { Link } from 'react-router-dom';
-import { browserHistory, Router } from 'react-router'
+import { Router } from 'react-router'
 import createBrowserHistory from 'history/createBrowserHistory'
 import BaseTemplate from './base-template';
 import Home from './components/home';
 import About from './components/about';
 import UserData from './components/personal';
-import Items from './components/items';
+import Items from './containers/ItemsContainer';
 import ItemDetails from './components/item-details';
 import Topics from './components/topics';
 import ShowTheLocation from './components/show-location'

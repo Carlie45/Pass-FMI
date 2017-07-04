@@ -1,15 +1,14 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import ItemsList from './items-list';
+import PropTypes from 'prop-types';
 
 class Items extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { items: [{id: 1, title: 'Test 1', subject: 'Math', author: 'White Rose'},
-                           {id: 2, title: 'Test 2', subject: 'Math', author: 'White Rose'}]};
+  componentWillMount() {
+    this.props.actions.getItems();
   }
-  
+
   render() {
+    console.log(this.props.items, 'wiiiiii');
     return (
       <div className="container">
         <h3>Учебни материали</h3>
@@ -17,15 +16,22 @@ class Items extends React.Component {
             <thead>
             <tr>
                 <th className="items-header">Заглавие</th>
-                <th className="items-header">Предметна област</th> 
+                <th className="items-header">Предметна област</th>
                 <th className="items-header">Добавил</th>
             </tr>
             </thead>
-            <ItemsList items={this.state.items} />
+            <ItemsList items={this.props.items} />
         </table>
       </div>
     );
   }
 }
 
-export default connect()(Items);
+Items.propTypes = {
+  actions: PropTypes.shape({
+    getItems: PropTypes.func.isRequired
+  }),
+  items: PropTypes.array
+}
+
+export default Items;
