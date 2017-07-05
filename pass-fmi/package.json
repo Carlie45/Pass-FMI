@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "axios": "^0.16.2",
+    "bluebird": "^3.5.0",
     "body-parser": "^1.17.1",
     "connect": "^3.6.2",
     "cookie-parser": "^1.4.3",
@@ -14,6 +15,7 @@
     "history": "^4.6.1",
     "indicative": "^2.2.1",
     "jquery": "^3.1.0",
+    "lodash": "^4.17.4",
     "mongoose": "^4.9.5",
     "mongoose-auto-increment": "^5.0.1",
     "mongoose-deep-populate": "^3.0.0",
@@ -32,7 +34,8 @@
     "redux": "^3.6.0",
     "redux-thunk": "^2.2.0",
     "remarkable": "^1.6.2",
-    "serve-favicon": "^2.4.2"
+    "serve-favicon": "^2.4.2",
+    "superagent": "^3.5.2"
   },
   "devDependencies": {
     "autoprefixer": "6.7.2",

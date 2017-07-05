@@ -88,15 +88,22 @@ router.post('/register', function(req, res) {
           res.statusCode = 500;
           res.send('Error');
         }
-        res.statusCode = 200;
-        res.send(user);
+        user = req.user;
+        // user.salt.delete();
+        user.salt = null;
+        user.hash = null;
+        res.status(200).send({user});
       });
   });
 });
 
 router.post('/login', passport.authenticate('local'), function(req, res) {
     console.log(req.user);
-    res.status(200).send('OK');
+    user = req.user;
+    // user.salt.delete();
+    user.salt = null;
+    user.hash = null;
+    res.status(200).send({user});
 });
 
 router.get('/logout', function(req, res) {

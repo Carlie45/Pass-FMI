@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 import { Router } from 'react-router'
 import createBrowserHistory from 'history/createBrowserHistory'
 import BaseTemplate from './base-template';
-import Home from './components/home';
+import Home from './containers/HomeContainer';
 import About from './components/about';
 import UserData from './components/personal';
 import Items from './containers/ItemsContainer';
