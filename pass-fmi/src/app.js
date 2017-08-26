@@ -13,6 +13,7 @@ import UserData from './components/personal';
 import Items from './containers/ItemsContainer';
 import ItemDetails from './containers/itemDetailsContainer';
 import Users from './containers/usersContainer';
+import UserDetails from './containers/userDetailsContainer';
 import ShowTheLocation from './components/show-location'
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
@@ -47,6 +48,7 @@ class App extends Component {
         <Route path="/items" exact component={Items} />
         <Route path="/items/:itemId" component={ItemDetails} />
         <Route path="/users" component={Users} />
+        <Route path="/users/:username" component={UserDetails} />
         <Route path="/show-location" component={ShowTheLocation} />
       </div>
     );

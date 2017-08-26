@@ -4,6 +4,7 @@ import counter from './counter';
 import items from './items';
 //import comments from './comments';
 import users from './users';
+import user from './user';
 
 // export default combineReducers(
 //   {
@@ -16,5 +17,6 @@ export default {
   counter,
   items,
 //  comments,
-  users
+  users,
+  user
 }
