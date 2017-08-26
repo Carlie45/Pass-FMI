@@ -11,8 +11,9 @@ import Home from './containers/HomeContainer';
 import About from './components/about';
 import UserData from './components/personal';
 import Items from './containers/ItemsContainer';
-import ItemDetails from './components/item-details';
 import ItemsNew from './containers/ItemsNewContainer';
+import ItemDetails from './containers/itemDetailsContainer';
+import Users from './containers/usersContainer';
 import ShowTheLocation from './components/show-location'
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
@@ -35,6 +36,7 @@ class App extends Component {
           <li><Link to="/about">Мисия</Link></li>
           <li><Link to="/personal">Лични данни</Link></li>
           <li><Link to="/items">Учебни материали</Link></li>
+          <li><Link to="/users">Потребители</Link></li>
           <li><Link to="/show-location">Show the Location</Link></li>
         </ul>
         <hr />
@@ -46,6 +48,7 @@ class App extends Component {
         <Route path="/items" exact component={Items} />
         <Route path="/items-new" exact component={ItemsNew} />
         <Route path="/items/:itemId" component={ItemDetails} />
+        <Route path="/users" component={Users} />
         <Route path="/show-location" component={ShowTheLocation} />
       </div>
     );

@@ -4,7 +4,6 @@ import '../../styles/styles.css';
 
 class ItemsList extends React.Component {
   render() {
-    console.log(this.props.items, 'wiiiiiieklrjseikfhdjkhf');
     return (
       <tbody>{
             this.props.items.map(

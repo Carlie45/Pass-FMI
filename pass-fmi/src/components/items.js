@@ -8,7 +8,6 @@ class Items extends React.Component {
   }
 
   render() {
-    console.log(this.props.items, 'wiiiiii');
     return (
       <div className="container">
         <h3>Учебни материали</h3>

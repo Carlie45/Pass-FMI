@@ -1,21 +1,21 @@
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { getItems } from '../actions/items';
-import Items from '../components/items';
+import { getUsers } from '../actions/users';
+import Users from '../components/users';
 
 function mapStateToProps(state) {
   return {
-    items: state.items
+    users: state.users
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators({ getItems }, dispatch)
+    actions: bindActionCreators({ getUsers }, dispatch)
   };
 }
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Items);
+)(Users);

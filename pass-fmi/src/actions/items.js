@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 
 
 export function getItems() {
-  console.log('Action');
   return dispatch => {
     axios.get('/api/items/itemsList')
       .then(response => {

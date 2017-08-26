@@ -1,7 +1,7 @@
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { getItems } from '../actions/items';
-import Items from '../components/items';
+import ItemDetails from '../components/item-details';
 
 function mapStateToProps(state) {
   return {
@@ -18,4 +18,4 @@ function mapDispatchToProps(dispatch) {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Items);
+)(ItemDetails);
