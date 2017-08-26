@@ -2,6 +2,8 @@ import {combineReducers } from 'redux'
 
 import counter from './counter';
 import items from './items';
+//import comments from './comments';
+import users from './users';
 
 // export default combineReducers(
 //   {
@@ -12,5 +14,7 @@ import items from './items';
 
 export default {
   counter,
-  items
+  items,
+//  comments,
+  users
 }
