@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './base-template.css';
 import { connect } from 'react-redux';
 
@@ -9,11 +8,8 @@ class BaseTemplate extends Component {
     return (
       <div className="base">
         <div className="base-header">
-          <img src={logo} className="base-logo" alt="logo" />
-          <h2>Pass FMI</h2>
+          <h2 className="title">Pass FMI</h2>
         </div>
-        <p className="base-intro">
-        </p>
       </div>
     );
   }

@@ -1,7 +1,7 @@
 import React from 'react';
 import ItemsList from './items-list';
 import PropTypes from 'prop-types';
-
+import { Link } from 'react-router-dom';
 class Items extends React.Component {
   componentWillMount() {
     this.props.actions.getItems();
@@ -22,6 +22,9 @@ class Items extends React.Component {
             </thead>
             <ItemsList items={this.props.items} />
         </table>
+        <div>
+          <Link to="/items-new">New Item</Link>
+        </div>
       </div>
     );
   }

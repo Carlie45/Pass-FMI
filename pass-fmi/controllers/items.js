@@ -26,10 +26,13 @@ router.post('/', function(req, res) {
   item.price = req.body.price;
   item.comments = [];
 
+  console.log('IEME');
+  console.log(item);
   Item.create(item).then(item => {
     res.status(200).json(item);
   })
   .catch(error => {
+    console.log(error)
     res.status(500).send(error);
   });
 });
