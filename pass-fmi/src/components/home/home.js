@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import '../../styles/styles.css';
+import './index.css';
 
 @connect()
 export default class Home extends Component {

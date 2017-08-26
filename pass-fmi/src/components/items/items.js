@@ -1,7 +1,10 @@
 import React from 'react';
-import ItemsList from './items-list';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import './index.css';
+
+import ItemsList from '../items-list/items-list';
+
 class Items extends React.Component {
   componentWillMount() {
     this.props.actions.getItems();

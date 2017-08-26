@@ -1,6 +1,8 @@
 import React from 'react';
 import { Redirect } from 'react-router'
 import { withRouter } from 'react-router-dom'
+import './index.css';
+
 class Item extends React.Component {
 
     constructor(props) {
@@ -13,7 +15,7 @@ class Item extends React.Component {
     }
 
     onBackButtonEvent = () => {
-        
+
     }
 
     componentDidMount = () => {
@@ -22,7 +24,7 @@ class Item extends React.Component {
         //     this.setState({onBack : true});
         //     this.setState({selectedItemIndex : -1});
         //     this.setState({redirectToDetailsView : false});
-        // } 
+        // }
     }
 
     handleClick(itemId) {

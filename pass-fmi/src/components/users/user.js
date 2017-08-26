@@ -1,12 +1,13 @@
 import React from 'react';
 import { Redirect } from 'react-router'
 import { withRouter } from 'react-router-dom'
+import './index.css';
 
 class User extends React.Component {
 
     constructor(props) {
         super(props);
-        
+
     }
 
     render() {

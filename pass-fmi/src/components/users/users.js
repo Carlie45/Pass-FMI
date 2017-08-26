@@ -1,6 +1,7 @@
 import React from 'react';
 import UsersList from './users-list';
 import PropTypes from 'prop-types';
+import './index.css';
 
 class Users extends React.Component {
   componentWillMount() {

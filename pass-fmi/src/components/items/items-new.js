@@ -1,7 +1,7 @@
 import React from 'react';
 // import ItemsList from './items-list';
 import PropTypes from 'prop-types';
-import '../../styles/styles.css';
+import './items-new.css';
 
 class ItemsNew extends React.Component {
   constructor(props) {

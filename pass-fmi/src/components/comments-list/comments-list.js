@@ -1,6 +1,6 @@
 import React from 'react';
 import Comment from './comment';
-import '../../styles/styles.css'; 
+import './index.css';
 
 const CommentsList  = (props) => (
 <ol>{

@@ -1,7 +1,7 @@
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { addItem } from '../actions/items';
-import ItemsNew from '../components/items-new';
+import ItemsNew from '../components/items/items-new';
 
 function mapStateToProps(state) {
   return {

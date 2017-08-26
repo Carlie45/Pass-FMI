@@ -1,9 +1,10 @@
-.navbar-form, .navbar-form button {
+.main-menu {
+  list-style-type: none;
+}
+.main-menu li{
   display: inline-block;
 }
 
-.navbar-right {
-  float: right;
-  padding-right: 20px
+.main-menu li:not(:first-child)::before {
+  content: "\00a0 | ";
 }
-

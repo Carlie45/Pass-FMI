@@ -6,15 +6,16 @@ import { Route } from 'react-router';
 import { Link } from 'react-router-dom';
 import { Router } from 'react-router'
 import createBrowserHistory from 'history/createBrowserHistory'
+
 import BaseTemplate from './base-template';
 import Home from './containers/HomeContainer';
-import About from './components/about';
-import UserData from './components/personal';
+import About from './components/about/about';
+import UserData from './components/personal/personal';
 import Items from './containers/ItemsContainer';
 import ItemsNew from './containers/ItemsNewContainer';
 import ItemDetails from './containers/itemDetailsContainer';
 import Users from './containers/usersContainer';
-import ShowTheLocation from './components/show-location'
+
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 import {withRouter} from 'react-router';
@@ -49,21 +50,9 @@ class App extends Component {
         <Route path="/items-new" exact component={ItemsNew} />
         <Route path="/items/:itemId" component={ItemDetails} />
         <Route path="/users" component={Users} />
-        <Route path="/show-location" component={ShowTheLocation} />
       </div>
     );
   }
-
-  handleSerch = (event) => {
-    event.preventDefault();
-    const userName = event.target.elements[0].value;
-    const repo = event.target.elements[1].value;
-    const path = `/repos/${userName}/${repo}`;
-    // this.context.router.history.push(path);
-    // Now you can dispatch navigation actions from anywhere!
-    this.props.dispatch(push(path));
-  }
-
 }
 
 export default App;

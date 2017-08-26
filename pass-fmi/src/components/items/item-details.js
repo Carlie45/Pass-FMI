@@ -1,6 +1,6 @@
 import React from 'react';
-import CommentList from './comments-list';
-import '../../styles/styles.css';
+import CommentList from '../comments-list/comments-list';
+import './index.css';
 import PropTypes from 'prop-types';
 
 class ItemDetails extends React.Component {
@@ -15,7 +15,7 @@ class ItemDetails extends React.Component {
             newCommentText: 'Добавете коментар...'
         }
     }
-    
+
     getItemIndex = () => {
         let endInd = window.location.href.lastIndexOf('/');
         console.log(this.props);
