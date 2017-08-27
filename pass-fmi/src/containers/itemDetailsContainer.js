@@ -1,6 +1,7 @@
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { getItems } from '../actions/items';
+import { saveCommentToItem } from '../actions/items';
 import ItemDetails from '../components/item-details';
 
 function mapStateToProps(state) {

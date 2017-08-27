@@ -14,7 +14,25 @@
     width: 100%
 }
 
+.users {
+    padding: 20px
+}
+
+.users-table {
+    width: 100%;
+}
+
+.user-details-table {
+    width: 100%;
+    padding: 20px;
+}
+
 .items-header {
+    font-size: 20px;
+    height: 35px;
+}
+
+.users-header {
     font-size: 20px;
     height: 35px;
 }
@@ -23,6 +41,12 @@
     font-size: 25px;
     font-weight: bold;
     padding: 30px;
+}
+
+.user-item-title {
+    font-size: 25px;
+    font-weight: bold;
+    padding: 20px;
 }
 
 .item-details-table {
@@ -42,9 +66,25 @@
     padding-left: 30px;
 }
 
+.user-details-label {
+    font-size: 20px;
+    font-weight: bold;
+    width: 10%;
+    padding-left: 20px;
+}
+
 .item-details-value {
     font-size: 20px;
     background-color:#e3fcfc;
+    width: 30%;
+    padding-top: 5px;
+    padding-right: 30px;
+    padding-bottom: 5px;
+    padding-left: 30px;
+}
+
+.user-details-value {
+    font-size: 20px;
     width: 30%;
     padding-top: 5px;
     padding-right: 30px;
@@ -99,4 +139,14 @@
 
 .add-comment-textarea {
     width: 50%;
+}
+
+.user-items-table {
+    padding: 20px;
+    width: 50%;
+    font-size: 20px;
+}
+
+.user-item-col {
+    width: 25%;
 }

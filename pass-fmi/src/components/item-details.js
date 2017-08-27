@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 
 class ItemDetails extends React.Component {
     componentWillMount() {
-        console.log(this.props.actions);
         this.props.actions.getItems();
     }
 
@@ -18,7 +17,6 @@ class ItemDetails extends React.Component {
     
     getItemIndex = () => {
         let endInd = window.location.href.lastIndexOf('/');
-        console.log(this.props);
         return window.location.href.substring(endInd+1);
     }
 
@@ -28,18 +26,20 @@ class ItemDetails extends React.Component {
 
     handleAddComment = (e) => {
         e.preventDefault();
-        const date = new Date();
-        const day = date.getDate();
-        const month = date.getMonth()+1;
-        const year = date.getFullYear();
-        const hours = date.getHours();
-        const minutes = date.getMinutes();
-        const seconds = date.getSeconds();
-        let dateStr = day + "." + month + "." + year + " " + hours + ":" + minutes + ":" + seconds;
-        let newComment = {date: dateStr, username: "Guest", text: this.state.newCommentText};
-        this.props.items[this.getItemIndex()].comments.push(newComment);
+        // const date = new Date();
+        // const day = date.getDate();
+        // const month = date.getMonth()+1;
+        // const year = date.getFullYear();
+        // const hours = date.getHours();
+        // const minutes = date.getMinutes();
+        // const seconds = date.getSeconds();
+        // let dateStr = day + "." + month + "." + year + " " + hours + ":" + minutes + ":" + seconds;
+        // let newComment = {date: dateStr, username: "Guest", text: this.state.newCommentText};
+        let newComment = {text: this.state.newCommentText};
+        //this.props.items[this.getItemIndex()].comments.push(newComment);
+        this.props.actions.addComment({userId: "ppp"});
 
-        this.setState({newComment: this.state.newCommentText});
+        // this.setState({newComment: this.state.newCommentText});
     }
 
     render() {
@@ -67,15 +67,15 @@ class ItemDetails extends React.Component {
                     <tbody>
                         <tr>
                             <td className="author-details-label">Добавил:</td>
-                            <td className="author-details-value">{this.props.items[this.getItemIndex()].username}</td>
+                            <td className="author-details-value">{this.props.items[this.getItemIndex()].user.username}</td>
                         </tr>
                         <tr>
                             <td className="author-details-label">Телефон:</td>
-                            <td className="author-details-value">{this.props.items[this.getItemIndex()].phone}</td>
+                            <td className="author-details-value">{this.props.items[this.getItemIndex()].user.phone}</td>
                         </tr>
                         <tr>
                             <td className="author-details-label">e-mail:</td>
-                            <td className="author-details-value">{this.props.items[this.getItemIndex()].email}</td>
+                            <td className="author-details-value">{this.props.items[this.getItemIndex()].user.email}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -96,7 +96,8 @@ class ItemDetails extends React.Component {
 
 ItemDetails.propTypes = {
   actions: PropTypes.shape({
-    getItems: PropTypes.func.isRequired
+    getItems: PropTypes.func.isRequired,
+    addComment: PropTypes.func
   }),
   items: PropTypes.array
 }

@@ -16,6 +16,17 @@ router.get('/itemsList', function(req, res) {
   });
 });
 
+router.get('/itemsList/:username', function(req, res) {
+    Item.find({}, {sort: [['user.username', req.params.username]]}).deepPopulate('user comments.author').exec(function (err, items) {
+    if(items) {
+      res.status(200).json(items);
+    }
+    else {
+      res.status(404).send('Items not found!');
+    }
+  });
+});
+
 router.post('/', function(req, res) {
   let item = {};
 
