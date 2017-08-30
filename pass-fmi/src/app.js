@@ -14,7 +14,6 @@ import Items from './containers/ItemsContainer';
 import ItemDetails from './containers/itemDetailsContainer';
 import Users from './containers/usersContainer';
 import UserDetails from './containers/userDetailsContainer';
-import ShowTheLocation from './components/show-location'
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 import {withRouter} from 'react-router';
@@ -37,7 +36,6 @@ class App extends Component {
           <li><Link to="/personal">Лични данни</Link></li>
           <li><Link to="/items">Учебни материали</Link></li>
           <li><Link to="/users">Потребители</Link></li>
-          <li><Link to="/show-location">Show the Location</Link></li>
         </ul>
         <hr />
         <Router history={history}/>
@@ -49,7 +47,6 @@ class App extends Component {
         <Route path="/items/:itemId" component={ItemDetails} />
         <Route path="/users" component={Users} />
         <Route path="/users/:username" component={UserDetails} />
-        <Route path="/show-location" component={ShowTheLocation} />
       </div>
     );
   }

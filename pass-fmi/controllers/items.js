@@ -106,6 +106,42 @@ router.post('/addComment/:itemId', function(req, res) {
     res.status(404).send('User not found!');
   })
 });
+
+router.delete('/deleteComment/:itemId', function(req, res) {
+  Item.findById(req.params.itemId).then((item) => {
+      let commentId = req.body._id;
+      Comment.deleteOne({ _id: commentId}).then(function(result) {
+        let index = -1;
+        for (let i = 0; i < item.comments.length; i++) {
+            if (item.comments[i]._id === commentId) {
+              index = i;
+              break;
+            }
+        }
+
+        if (index > -1) {
+          item.comments = item.comments.splice(index, 1);
+        }
+      
+        Item.update({_id: item._id}, item).then((updatedItem) => {
+          Item.findById({_id: item._id}).deepPopulate('user comments.author').exec(function (err, item) {
+            if(item) {
+              res.status(200).json(item);
+            }
+            else {
+              res.status(404).send('Item not found!');
+            }
+          });
+        }).catch((error) => {
+          res.status(404).send(error);
+        })
+      })
+    }).catch(() => {
+      res.status(404).send('Item doesn\'t exist');
+    })
+});
+
+
 router.get('/:id', function(req, res) {
   Item.findById({_id: req.params.id}).deepPopulate('user comments.author').exec(function (err, item) {
     if(item) {

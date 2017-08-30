@@ -1,13 +1,21 @@
 import React from 'react';
-import Comment from './comment';
+import SingleComment from './comment';
 import '../../styles/styles.css'; 
 
-const CommentsList  = (props) => (
-<ol>{
-      props.comments.map(
-        comment => (<Comment key={comment._id} comment={comment} />)
-      )}
-</ol>
-);
+class CommentsList extends React.Component {
+  
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    return(
+    <ol>{
+          this.props.comments.map(
+            comment => (<SingleComment key={comment._id} comment={comment} actions={this.props.actions}/>)
+          )}
+    </ol>
+    )}
+}
 
 export default CommentsList;

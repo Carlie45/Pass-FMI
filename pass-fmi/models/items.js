@@ -20,6 +20,10 @@ let itemsSchema = new Schema({
     type: String,
     required: true
   },
+  author: {
+    type: String,
+    required: false
+  },
   price: Number,
   department: String,
   comments: [{

@@ -1,5 +1,4 @@
 import React from 'react';
-import { Redirect } from 'react-router'
 import { withRouter } from 'react-router-dom'
 import { store } from '../index';
 import { push } from 'react-router-redux';

@@ -1,8 +1,38 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import '../../styles/styles.css'; 
 
-const Comment = ({comment}) => (
-  <li className="comment-text"> {comment.date} : [{comment.username}] : {comment.text}</li>
-);
+class SingleComment extends React.Component {
+  
+  constructor(props) {
+    super(props);
+  }
 
-export default Comment;
+  getItemIndex = () => {
+      let endInd = window.location.href.lastIndexOf('/');
+      return window.location.href.substring(endInd+1);
+  }
+
+  handleDelete = (e) => {
+    e.preventDefault();
+    this.props.actions.deleteComment(this.getItemIndex(), e.target.id);
+    document.getElementById("comment-id-" + e.target.id).style.display = 'none';
+  }
+  
+  render() {
+    return (
+      <li id={"comment-id-"+this.props.comment._id} key={this.props.comment._id} className="comment-text"> {this.props.comment.createdAt.substring(0,10) + " " + this.props.comment.createdAt.substring(11,19)} 
+        : [{this.props.comment.author.username}] : {this.props.comment.content} 
+        <button id={this.props.comment._id} onClick={this.handleDelete} className="glyphicon glyphicon-remove pull-right"/>
+      </li>
+  )}
+}
+
+SingleComment.propTypes = {
+  actions: PropTypes.shape({
+    deleteComment: PropTypes.func
+  }),
+  item: PropTypes.object
+}
+
+export default SingleComment;

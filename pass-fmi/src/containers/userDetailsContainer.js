@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { getUser } from '../actions/user';
 import UserDetails from '../components/user-details';
 import { getItems } from '../actions/items';
-import Items from '../components/items';
 import { getUserItemsIds } from '../actions/user';
 
 function mapStateToProps(state) {
