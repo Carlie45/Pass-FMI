@@ -47,13 +47,6 @@ export function register(user, nextPath) {
           payload: {
             user,
             error: null
-          },
-          meta: {
-            transition: () => {
-              return {
-                pathname: `/${nextPath}`
-              };
-            }
           }
         });
       }, error => {
@@ -68,7 +61,31 @@ export function register(user, nextPath) {
   };
 }
 
-
+export function logout() {
+  return dispatch => {
+    return Auth.logout()
+      .then(response => {
+        console.log('Logout user', response);
+        console.log('Dispatch event');
+        dispatch({
+          type: 'USER_LOGOUT',
+          payload: {
+            user: null,
+            error: null
+          }
+        });
+      }, error => {
+        console.log('ERROR');
+        dispatch({
+          type: 'USER_LOGOUT',
+          payload: {
+            user: null,
+            error: 'error.message'
+          }
+        });
+      });
+  };
+}
 // export function register(userData) {
 //   return dispatch => {
 //     return UsersAPI.createUser(userData)

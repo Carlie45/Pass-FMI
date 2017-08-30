@@ -1,5 +1,5 @@
 import {connect} from 'react-redux';
-import {login, register} from '../actions/auth';
+import {login, register, logout} from '../actions/auth';
 import Home from '../components/home/home';
 
 function mapStateToProps(state) {
@@ -15,6 +15,9 @@ function mapDispatchToProps(dispatch) {
     },
     register: (user, nextPath) => {
       dispatch(register(user,nextPath));
+    },
+    logout: () => {
+      dispatch(logout());
     }
   };
 }

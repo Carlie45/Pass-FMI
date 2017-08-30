@@ -26,13 +26,10 @@ router.post('/', function(req, res) {
   item.price = req.body.price;
   item.comments = [];
 
-  console.log('IEME');
-  console.log(item);
   Item.create(item).then(item => {
     res.status(200).json(item);
   })
   .catch(error => {
-    console.log(error)
     res.status(500).send(error);
   });
 });
@@ -98,6 +95,29 @@ router.post('/addComment/:itemId', function(req, res) {
     res.status(404).send('User not found!');
   })
 });
+
+router.put('/:id', function(req,res) {
+  Item.findById(req.params.id).then((item) => {
+    item.subject = req.body.subject;
+    item.price = req.body.price;
+    item.title = req.body.title;
+    item.department = req.body.department;
+
+    Item.update({_id: item._id}, item).then((updateResponse) => {
+      Item.findById({_id: item._id}).deepPopulate('user comments.author').exec(function (err, item) {
+        if(item) {
+          res.status(200).json(item);
+        }
+        else {
+          res.status(404).send('Item not found!');
+        }
+      });
+    }).catch((error) => {
+      res.status(404).send(error);
+    })
+  })
+})
+
 router.get('/:id', function(req, res) {
   Item.findById({_id: req.params.id}).deepPopulate('user comments.author').exec(function (err, item) {
     if(item) {

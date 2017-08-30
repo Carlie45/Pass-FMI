@@ -88,3 +88,32 @@
 .comment-text {
     font-size: 15px;
 }
+
+tr:nth-child(even) {background: #CCC}
+
+tr {
+  height: 35px;
+}
+
+tbody tr:hover {
+  background-color: #b3b3cc;
+  cursor: pointer;
+}
+
+thead tr {background-color: #f0f0f5}
+
+td {
+  padding-left: 8px;
+}
+
+.new-btn {
+  width: 75px;
+}
+
+.new-button-container {
+  margin-bottom: 20px;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}

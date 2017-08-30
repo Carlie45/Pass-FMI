@@ -4,13 +4,7 @@ import './index.css';
 
 class ItemsList extends React.Component {
   render() {
-    return (
-      <tbody>{
-            this.props.items.map(
-              item => (<Item key={item._id} item={item} />)
-            )}
-      </tbody>
-    );
+    return <tbody>{this.props.items.map(item => (<Item key={item._id} item={item} />))}</tbody>
   }
 }
 

@@ -1,0 +1,37 @@
+.filter {
+  display: flex;
+  flex-direction: column;
+}
+
+.pickers {
+  display: flex;
+  flex-direction: row;
+}
+
+.inputs {
+  flex-direction: column;
+  width: 50%;
+  padding-left: 10px;
+}
+
+.selects {
+  flex-direction: column;
+  width: 50%;
+  padding-right: 10px;
+}
+
+label {
+  padding: 5px 0;
+}
+
+.clear-button {
+  width: 75px;
+}
+
+.clear-container {
+  margin-bottom: 20px;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}

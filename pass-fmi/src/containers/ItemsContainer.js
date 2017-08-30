@@ -1,6 +1,6 @@
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { getItems } from '../actions/items';
+import { getItems, filterBySubject, filterByDepartment, filterByOwnerName, filterByTitle} from '../actions/items';
 import Items from '../components/items/items';
 
 function mapStateToProps(state) {
@@ -11,7 +11,13 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators({ getItems }, dispatch)
+    actions: bindActionCreators({
+      getItems,
+      filterBySubject,
+      filterByDepartment,
+      filterByOwnerName,
+      filterByTitle
+    }, dispatch)
   };
 }
 

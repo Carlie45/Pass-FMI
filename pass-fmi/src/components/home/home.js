@@ -20,7 +20,7 @@ export default class Home extends Component {
 
   onLogoutClicked() {
     console.log('Logout')
-    // this.props.logout(this.props.user, '');
+    this.props.logout();
   }
 
   onRegisterClicked() {
@@ -31,8 +31,13 @@ export default class Home extends Component {
 
   render() {
     console.log(this.props.user);
+    let asd = null;
+    if(this.props.user) {
+      asd = <p> You are logged in! </p>
+    }
     return (
       <div>
+        {asd}
         {this.props.user && <h1>{this.props.user.username}</h1>}
         <h2 className="paragraph-title">Каква е целта на приложението?</h2>
         <p className="paragraph-body">Pass FMI е проект, който цели да подпомогне студентите в намиране на учебни материали, необходими за техните курсове.<br/><br/>
@@ -88,9 +93,9 @@ export default class Home extends Component {
                 </div>
               </div>
             </div>
-          <div className="col-lg-6">
-            <h4>Влизане</h4>
-            <div className="form-group">
+            <div className="col-lg-6">
+              <h4>Влизане</h4>
+              <div className="form-group">
                 <label>Потребителско име:</label>
                 <input id="login-username" className="form-control" type="text" onChange={(e, username) => {
                   this.username = e.target.value;
@@ -110,12 +115,14 @@ export default class Home extends Component {
                   }}>Влез</button>
                 </div>
               </div>
-              {this.props.user && <button id="login" type="submit" className="btn btn-primary" onClick={() => {
-                this.onLogoutClicked();
-              }}>Изход</button>}
-          </div>
+              <div>
+                {this.props.user && <button id="login" type="submit" className="btn btn-primary" onClick={() => {
+                  this.onLogoutClicked();
+                }}>Изход</button>}
+              </div>
             </div>
-         </div>
+          </div>
+        </div>
       </div>
     );
   }

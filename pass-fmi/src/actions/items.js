@@ -1,6 +1,4 @@
 import axios from 'axios'
-import { Link } from 'react-router-dom';
-
 
 export function getItems() {
   return dispatch => {
@@ -16,23 +14,79 @@ export function addItem(item) {
   return dispatch => {
     axios.post('api/items/', item)
       .then(response => {
-        console.log(response.data);
-        console.log('Response');
         dispatch({
           type: 'ADD_ITEM_SUCCESS',
           payload: {
             item: response.data
-          },
-          meta: {
-            //This don't work
-            transition: () => {
-              return {
-                pathname: `/items`
-              };
-            }
           }
         });
       })
       .catch(() => dispatch({type: 'ADD_ITEM_ERROR'}))
   }
+}
+
+export function filterBySubject(subject) {
+  return dispatch => {
+    dispatch({
+      type: 'FILTER_BY_SUBJECT',
+      payload: {
+        subject
+      }
+    })
+  }
+}
+
+export function filterByDepartment(department) {
+  return dispatch => {
+    dispatch({
+      type: 'FILTER_BY_DEPARTMENT',
+      payload: {
+        department
+      }
+    })
+  }
+}
+
+export function filterByOwnerName(name) {
+  return dispatch => {
+    dispatch({
+      type: 'FILTER_BY_OWNER_NAME',
+      payload: {
+        name
+      }
+    })
+  }
+}
+
+export function filterByTitle(title) {
+  return dispatch => {
+    dispatch({
+      type: 'FILTER_BY_TITLE',
+      payload: {
+        title
+      }
+    })
+  }
+}
+
+export function editItem(item) {
+  const bodyItem = {
+    subject: item.subject,
+    price: item.price,
+    department: item.department,
+    title: item.title
+  }
+
+  return dispatch => {
+    axios.put(`/api/items/${item._id}`, bodyItem)
+      .then(response => {
+        dispatch({
+          type: 'UPDATE_ITEM_SUCCESS',
+          item: response.data
+        });
+      })
+      .catch(() => dispatch({type: 'UPDATE_ITEM_ERROR'})
+    );
+  }
+  return;
 }

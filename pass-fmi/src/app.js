@@ -14,6 +14,7 @@ import UserData from './components/personal/personal';
 import Items from './containers/ItemsContainer';
 import ItemsNew from './containers/ItemsNewContainer';
 import ItemDetails from './containers/itemDetailsContainer';
+import ItemsEdit from './containers/ItemsEditContainer';
 import Users from './containers/usersContainer';
 
 import { connect } from 'react-redux';
@@ -38,7 +39,6 @@ class App extends Component {
           <li><Link to="/personal">Лични данни</Link></li>
           <li><Link to="/items">Учебни материали</Link></li>
           <li><Link to="/users">Потребители</Link></li>
-          <li><Link to="/show-location">Show the Location</Link></li>
         </ul>
         <hr />
         <Router history={history}/>
@@ -48,6 +48,7 @@ class App extends Component {
         <Route path="/personal" component={UserData} />
         <Route path="/items" exact component={Items} />
         <Route path="/items-new" exact component={ItemsNew} />
+        <Route path="/items-edit/:itemId" exact component={ItemsEdit} />
         <Route path="/items/:itemId" component={ItemDetails} />
         <Route path="/users" component={Users} />
       </div>
