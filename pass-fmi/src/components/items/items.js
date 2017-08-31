@@ -17,6 +17,8 @@ class Items extends React.Component {
   }
 
   render() {
+    console.log('items')
+    console.log(this.props.user)
     return (
       <div className="container">
         <h3>Учебни материали</h3>
@@ -40,12 +42,12 @@ class Items extends React.Component {
             <ItemsList items={this.props.items} />
         </table>
         <div className="new-button-container">
-          <button className="btn-success new-btn" onClick={(e) => {
+          {this.props.user && <button className="btn-success new-btn" onClick={(e) => {
               this.props.history.push('/items-new');
               e.preventDefault();
             }}>
             Добави
-          </button>
+          </button>}
         </div>
       </div>
     );
@@ -60,7 +62,8 @@ Items.propTypes = {
     filterByOwnerName: PropTypes.func.isRequired,
     filterByTitle: PropTypes.func.isRequired
   }),
-  items: PropTypes.array
+  items: PropTypes.array,
+  user: PropTypes.object
 }
 
 export default Items;

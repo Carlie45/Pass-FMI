@@ -5,7 +5,8 @@ import ItemDetails from '../components/items/item-details';
 
 function mapStateToProps(state) {
   return {
-    items: state.items
+    items: state.items,
+    user: state.auth.user
   };
 }
 

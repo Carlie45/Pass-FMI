@@ -5,7 +5,8 @@ import ItemsEdit from '../components/items/items-edit';
 
 function mapStateToProps(state) {
   return {
-    items: state.items
+    items: state.items,
+    user: state.auth.user
   };
 }
 

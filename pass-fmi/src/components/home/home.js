@@ -13,37 +13,23 @@ export default class Home extends Component {
   }
 
   onLoginClicked() {
-    console.log(this.username);
-    console.log(this.password);
     this.props.login(this.username, this.password, '/items');
   }
 
   onLogoutClicked() {
-    console.log('Logout')
     this.props.logout();
   }
 
   onRegisterClicked() {
     this.registerUser.role = 'Dummy';
-    console.log(this.registerUser);
     this.props.register(this.registerUser,'');
   }
 
   render() {
-    console.log(this.props.user);
-    let asd = null;
-    if(this.props.user) {
-      asd = <p> You are logged in! </p>
-    }
-    return (
-      <div>
-        {asd}
-        {this.props.user && <h1>{this.props.user.username}</h1>}
-        <h2 className="paragraph-title">Каква е целта на приложението?</h2>
-        <p className="paragraph-body">Pass FMI е проект, който цели да подпомогне студентите в намиране на учебни материали, необходими за техните курсове.<br/><br/>
-        За да пишете коментари или да качвате материали, моля първо се регистрирайте и влезте в приложението.</p>
-        <br/><br/>
+    let userLoggedin = null;
 
+    if(!this.props.user) {
+      userLoggedin = (
         <div className="container">
           <div className="row">
             <div className="col-lg-6">
@@ -115,14 +101,29 @@ export default class Home extends Component {
                   }}>Влез</button>
                 </div>
               </div>
-              <div>
-                {this.props.user && <button id="login" type="submit" className="btn btn-primary" onClick={() => {
-                  this.onLogoutClicked();
-                }}>Изход</button>}
-              </div>
+
             </div>
           </div>
         </div>
+      )
+    } else {
+      userLoggedin = (
+        <div>
+          <button id="login" type="submit" className="btn btn-primary" onClick={() => {
+            this.onLogoutClicked();
+          }}>Изход</button>
+        </div>
+      )
+    }
+
+    return (
+      <div>
+        {this.props.user && <h1>{this.props.user.username}</h1>}
+        <h2 className="paragraph-title">Каква е целта на приложението?</h2>
+        <p className="paragraph-body">Pass FMI е проект, който цели да подпомогне студентите в намиране на учебни материали, необходими за техните курсове.<br/><br/>
+        За да пишете коментари или да качвате материали, моля първо се регистрирайте и влезте в приложението.</p>
+        <br/><br/>
+        {userLoggedin}
       </div>
     );
   }

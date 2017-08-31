@@ -1,27 +1,25 @@
 import React from 'react';
-// import ItemsList from './items-list';
 import PropTypes from 'prop-types';
+
 import './items-new.css';
 
 class ItemsNew extends React.Component {
   constructor(props) {
     super(props);
+
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleClick = this.handleClick.bind(this);
     super(props);
-    //here should set logged userId this should be some id which is in the db
+
     this.item = {
-      userId: '59a0894dca83fc177b9e71ee'
+      userId: this.props.user._id
     };
-    console.log('HSITORY')
-    console.log(this.props);
-    console.log(this.props.history)
-    // console.log(this.props.actions.addItem);
   }
+
   handleSubmit(event) {
-  // console.log(this.item)
   this.props.actions.addItem(this.item);
    event.preventDefault();
+   this.props.history.push('/items');
   }
 
   handleClick(e) {
@@ -65,9 +63,6 @@ class ItemsNew extends React.Component {
           </label>
 
           <button className="add-item-button btn-success" type="submit" value="Submit">Добави</button>
-          <button onClick={this.handleClick}>
-            Navigate outside of component to About page
-          </button>
         </form>
       </div>
     );
@@ -78,7 +73,8 @@ ItemsNew.propTypes = {
   actions: PropTypes.shape({
     addItem: PropTypes.func.isRequired
   }),
-  items: PropTypes.array
+  items: PropTypes.array,
+  user: PropTypes.object
 }
 
 export default ItemsNew;

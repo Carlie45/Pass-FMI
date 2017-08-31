@@ -53,59 +53,55 @@ class ItemDetails extends React.Component {
   }
 
   render() {
-    console.log('details');
-    console.log(this.props.items);
-    console.log(this.getItemIndex());
-    console.log(this.getItem());
     return(
       <div>
-          <div className="item-title">{this.getItem.title}</div>
+        <div className="item-title">{this.getItem.title}</div>
 
-          <table className="item-details-table">
-              <tbody>
-                  <tr>
-                      <td className="item-details-label">Автор:</td>
-                      <td className="item-details-value">{this.getItem().author}</td>
-                  </tr>
-                  <tr>
-                      <td className="item-details-label">Предметна област:</td>
-                      <td className="item-details-value">{this.getItem().subject}</td>
-                  </tr>
-                  <tr>
-                      <td className="item-details-label">Катедра:</td>
-                      <td className="item-details-value">{this.getItem().department}</td>
-                  </tr>
-              </tbody>
-          </table>
-          <table className="author-details-table">
-              <tbody>
-                  <tr>
-                      <td className="author-details-label">Добавил:</td>
-                      <td className="author-details-value">{this.getItem().user.username}</td>
-                  </tr>
-                  <tr>
-                      <td className="author-details-label">Телефон:</td>
-                      <td className="author-details-value">{this.getItem().user.phone}</td>
-                  </tr>
-                  <tr>
-                      <td className="author-details-label">e-mail:</td>
-                      <td className="author-details-value">{this.getItem().user.email}</td>
-                  </tr>
-              </tbody>
-          </table>
-          <div className="item-details-price">Цена: {this.getItem().price}</div>
-          <button onClick={this.handleEdit}>
-            Edit
-          </button>
-          <br/>
-          <h3 className="item-title">Коментари</h3>
-          <CommentList comments={this.getItem().comments}/>
-          <div className="add-comment-section">
-              <textarea className="add-comment-textarea" name="add-comment-area" onChange={this.handleChange} form="add-comments-form" value={this.state.newCommentText}></textarea>
-              <form id="add-comments-form" onSubmit={this.handleAddComment}>
-                  <button id="add-comment-button" type="submit" className="btn btn-primary">Добави</button>
-              </form>
-          </div>
+        <table className="item-details-table">
+            <tbody>
+                <tr>
+                    <td className="item-details-label">Автор:</td>
+                    <td className="item-details-value">{this.getItem().author}</td>
+                </tr>
+                <tr>
+                    <td className="item-details-label">Предметна област:</td>
+                    <td className="item-details-value">{this.getItem().subject}</td>
+                </tr>
+                <tr>
+                    <td className="item-details-label">Катедра:</td>
+                    <td className="item-details-value">{this.getItem().department}</td>
+                </tr>
+            </tbody>
+        </table>
+        <table className="author-details-table">
+            <tbody>
+                <tr>
+                    <td className="author-details-label">Добавил:</td>
+                    <td className="author-details-value">{this.getItem().user.username}</td>
+                </tr>
+                <tr>
+                    <td className="author-details-label">Телефон:</td>
+                    <td className="author-details-value">{this.getItem().user.phone}</td>
+                </tr>
+                <tr>
+                    <td className="author-details-label">e-mail:</td>
+                    <td className="author-details-value">{this.getItem().user.email}</td>
+                </tr>
+            </tbody>
+        </table>
+        <div className="item-details-price">Цена: {this.getItem().price}</div>
+        {this.props.user && (this.props.user.role == 'Admin' || this.props.user._id == this.getItem().user._id) && <button onClick={this.handleEdit}>
+          Edit
+        </button>}
+        <br/>
+        <h3 className="item-title">Коментари</h3>
+        <CommentList comments={this.getItem().comments}/>
+        {this.props.user && <div className="add-comment-section">
+            <textarea className="add-comment-textarea" name="add-comment-area" onChange={this.handleChange} form="add-comments-form" value={this.state.newCommentText}></textarea>
+            <form id="add-comments-form" onSubmit={this.handleAddComment}>
+                <button id="add-comment-button" type="submit" className="btn btn-primary">Добави</button>
+            </form>
+        </div>}
       </div>
     );
   }

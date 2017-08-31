@@ -16,7 +16,13 @@
   font-size: large;
 }
 
-/*@keyframes base-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}*/
+.main-menu {
+  list-style-type: none;
+}
+.main-menu li{
+  display: inline-block;
+}
+
+.main-menu li:not(:first-child)::before {
+  content: "\00a0 | ";
+}

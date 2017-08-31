@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 import { Router } from 'react-router'
 import createBrowserHistory from 'history/createBrowserHistory'
 
-import BaseTemplate from './base-template';
+import BaseTemplate from './containers/BaseContainer';
 import Home from './containers/HomeContainer';
 import About from './components/about/about';
 import UserData from './components/personal/personal';
@@ -33,14 +33,6 @@ class App extends Component {
   render() {
     return (
       <div>
-        <ul className="main-menu">
-          <li><Link to="/home">Начало</Link></li>
-          <li><Link to="/about">Мисия</Link></li>
-          <li><Link to="/personal">Лични данни</Link></li>
-          <li><Link to="/items">Учебни материали</Link></li>
-          <li><Link to="/users">Потребители</Link></li>
-        </ul>
-        <hr />
         <Router history={history}/>
         <Route path="/" component={BaseTemplate} />
         <Route path="/home" component={Home} />

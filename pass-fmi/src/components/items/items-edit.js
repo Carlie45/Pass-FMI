@@ -17,8 +17,9 @@ class ItemsEdit extends React.Component {
 
   handleSubmit = (event) => {
     const composed_item = assign(this.state.item, this.item);
-
-    this.props.actions.editItem(composed_item);
+    if ( this.props.user && (this.props.user.role == 'Admin' || this.props.user._id == this.getItem().user._id) ) {
+      this.props.actions.editItem(composed_item);
+    }
     event.preventDefault();
 
     this.props.history.push(`/items/${this.props.match.params.itemId}`);
