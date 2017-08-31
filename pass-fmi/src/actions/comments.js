@@ -16,6 +16,7 @@ export function deleteComment(itemId, commentId) {
       const body = {_id: commentId};
       axios.delete('/api/items/deleteComment/' + itemId, body)
       .then(response => {
+        console.log(response.data)
         dispatch({type: 'DELETE_COMMENT_SUCCESS', item: response.data});
       })
       .catch(() => dispatch({type: 'DELETE_COMMENT_ERROR'}));
