@@ -6,3 +6,19 @@
     font-size: 20px;
     height: 35px;
 }
+
+#users {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.users-table {
+  margin-top: 16px;
+  width: 70%;
+  text-align: center;
+}
+
+.users-table th {
+  text-align: center;
+}

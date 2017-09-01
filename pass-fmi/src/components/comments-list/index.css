@@ -1,7 +1,11 @@
 .paragraph-title {
-    padding: 20px;
+  padding: 20px;
+  padding-bottom: 0;
 }
 
 .comment-text {
-    font-size: 15px;
+  width: 700px;
+  font-size: 15px;
+  margin-bottom: 10px;
+  word-break: break-all;
 }

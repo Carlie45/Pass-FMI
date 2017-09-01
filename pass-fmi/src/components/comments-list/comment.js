@@ -23,7 +23,7 @@ class SingleComment extends React.Component {
     return (
       <li id={"comment-id-"+this.props.comment._id} key={this.props.comment._id} className="comment-text"> {this.props.comment.createdAt.substring(0,10) + " " + this.props.comment.createdAt.substring(11,19)}
         : [{this.props.comment.author.username}] : {this.props.comment.content}
-        <button id={this.props.comment._id} onClick={this.handleDelete} className="glyphicon glyphicon-remove pull-right"/>
+        {(this.props.comment.author._id === this.props.user._id || this.props.user.role === 'Admin') && <button id={this.props.comment._id} onClick={this.handleDelete} className="glyphicon glyphicon-remove pull-right"/>}
       </li>
   )}
 }
@@ -32,7 +32,8 @@ SingleComment.propTypes = {
   actions: PropTypes.shape({
     deleteComment: PropTypes.func
   }),
-  item: PropTypes.object
+  item: PropTypes.object,
+  user: PropTypes.object
 }
 
 export default SingleComment;

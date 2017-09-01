@@ -1,5 +1,5 @@
 import {connect} from 'react-redux';
-import {login, register, logout} from '../actions/auth';
+import {logout} from '../actions/auth';
 import BaseTemplate from '../base-template';
 
 function mapStateToProps(state) {
@@ -8,4 +8,12 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(BaseTemplate);
+function mapDispatchToProps(dispatch) {
+  return {
+    logout: () => {
+      dispatch(logout());
+    }
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(BaseTemplate);

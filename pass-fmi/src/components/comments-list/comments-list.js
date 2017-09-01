@@ -12,7 +12,7 @@ class CommentsList extends React.Component {
     return(
     <ol>{
           this.props.comments.map(
-            comment => (<SingleComment key={comment._id} comment={comment} actions={this.props.actions}/>)
+            comment => (<SingleComment key={comment._id} comment={comment} actions={this.props.actions} user={this.props.user}/>)
           )}
     </ol>
     )}

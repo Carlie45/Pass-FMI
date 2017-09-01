@@ -25,7 +25,8 @@ label {
 }
 
 .clear-button {
-  width: 75px;
+  width: 120px;
+  font-size: 18px;
 }
 
 .clear-container {

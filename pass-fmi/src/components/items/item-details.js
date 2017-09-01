@@ -33,8 +33,7 @@ class ItemDetails extends React.Component {
 
   handleAddComment = (e) => {
       e.preventDefault();
-      // Add logged user username
-      this.props.actions.addComment(this.getItem()._id, "dani", this.state.newCommentText);
+      this.props.actions.addComment(this.getItem()._id, this.props.user.username, this.state.newCommentText);
       this.setState({newCommentText: 'Добавете коментар...'});
   }
 
@@ -81,16 +80,16 @@ class ItemDetails extends React.Component {
             </tbody>
         </table>
         <div className="item-details-price">Цена: {this.getItem().price}</div>
-        {this.props.user && (this.props.user.role == 'Admin' || this.props.user._id == this.getItem().user._id) && <button onClick={this.handleEdit}>
+        {this.props.user && (this.props.user.role == 'Admin' || this.props.user._id == this.getItem().user._id) && <button onClick={this.handleEdit} className="edit-btn btn btn-primary">
           Edit
         </button>}
         <br/>
         <h3 className="item-title">Коментари</h3>
-        <CommentList comments={this.getItem().comments} actions={this.props.actions}/>
+        <CommentList comments={this.getItem().comments} actions={this.props.actions} user={this.props.user}/>
         {this.props.user && <div className="add-comment-section">
             <textarea className="add-comment-textarea" name="add-comment-area" onChange={this.handleChange} form="add-comments-form" value={this.state.newCommentText}></textarea>
             <form id="add-comments-form" onSubmit={this.handleAddComment}>
-                <button id="add-comment-button" type="submit" className="btn btn-primary">Добави</button>
+                <button type="submit" className="add-comment-button btn btn-primary">Добави</button>
             </form>
         </div>}
       </div>
@@ -104,7 +103,8 @@ ItemDetails.propTypes = {
     addComment: PropTypes.func,
     deleteComment: PropTypes.func
   }),
-  items: PropTypes.array
+  items: PropTypes.array,
+  user: PropTypes.object
 }
 
 export default ItemDetails;

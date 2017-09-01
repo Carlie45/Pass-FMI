@@ -83,6 +83,7 @@
 
 .add-comment-textarea {
     width: 50%;
+    height: 80px;
 }
 
 .comment-text {
@@ -107,7 +108,8 @@ td {
 }
 
 .new-btn {
-  width: 75px;
+  width: 120px;
+  font-size: 18px;
 }
 
 .new-button-container {

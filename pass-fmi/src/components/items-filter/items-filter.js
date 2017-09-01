@@ -6,10 +6,6 @@ import {uniq} from 'lodash'
 import './index.css';
 
 class ItemsFilter extends React.Component {
-  // componentWillReceiveProps(nextProps) {
-  //   console.log(nextProps);
-  // }
-
   subjectPicked = (event) => {
     this.props.filterBySubject(event.target.value);
   }
@@ -83,7 +79,7 @@ class ItemsFilter extends React.Component {
           </div>
         </div>
         <div className="clear-container">
-          <button className="clear-button btn-success" onClick={this.clearFilter}>Изчисти</button>
+          <button className="clear-button btn-success btn-primary" onClick={this.clearFilter}>Изчисти</button>
         </div>
       </div>
     );

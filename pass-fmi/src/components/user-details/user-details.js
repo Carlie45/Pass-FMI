@@ -42,38 +42,37 @@ class UserDetails extends React.Component {
 
     render() {
         return(
-            <div>
+            <div className="user-details">
                 <table className="user-details-table">
                     <tbody>
                         <tr>
-                            <td className="user-details-label">Потребителско име</td>
+                            <td className="user-details-label"><strong>Потребителско име</strong></td>
                             <td className="user-details-value">{this.props.user.username}</td>
                         </tr>
                         <tr>
-                            <td className="user-details-label">Първо име</td>
+                            <td className="user-details-label"><strong>Първо име</strong></td>
                             <td className="user-details-value"> {this.props.user.firstName}</td>
                         </tr>
                         <tr>
-                            <td className="user-details-label">Фамилия</td>
+                            <td className="user-details-label"><strong>Фамилия</strong></td>
                             <td className="user-details-value"> {this.props.user.lastName}</td>
                         </tr>
                         <tr>
-                            <td className="user-details-label">E-mail</td>
+                            <td className="user-details-label"><strong>E-mail</strong></td>
                             <td className="user-details-value"> {this.props.user.email}</td>
                         </tr>
                         <tr>
-                            <td className="user-details-label">Телефон</td>
+                            <td className="user-details-label"><strong>Телефон</strong></td>
                             <td className="user-details-value"> {this.props.user.phone}</td>
                         </tr>
                         <tr>
-                            <td className="user-details-label">Роля</td>
+                            <td className="user-details-label"><strong>Роля</strong></td>
                             <td className="user-details-value">{this.props.user.role}</td>
                         </tr>
                     </tbody>
                 </table>
                 <br/>
-                <div className="user-item-title">Собствени учебни материали:
-                </div>
+                <h2 className="user-item-title">Собствени учебни материали:</h2>
                 <table className="user-items-table">
                     <thead>
                         <tr>

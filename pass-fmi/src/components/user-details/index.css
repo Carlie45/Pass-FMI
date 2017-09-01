@@ -1,9 +1,33 @@
 .user-items-table {
     padding: 20px;
-    width: 50%;
+    width: 70%;
     font-size: 20px;
+    text-align: center;
+}
+
+.user-items-table th {
+  text-align: center;
 }
 
 .user-item-col {
     width: 25%;
+}
+
+.user-details {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.user-details-table {
+  width: 50%;
+  text-align: center;
+  background-color: white;
+  margin-bottom: 20px;
+}
+
+.user-item-title {
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: 30px;
 }

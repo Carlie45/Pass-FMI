@@ -8,8 +8,6 @@ export function login(username, password, nextPath) {
   return dispatch => {
     return Auth.login(username, password)
       .then(user => {
-        console.log('Logged user', user);
-        console.log('Dispatch event');
         dispatch({
           type: 'AUTH_COMPLETED',
           payload: {
@@ -40,8 +38,6 @@ export function register(user, nextPath) {
   return dispatch => {
     return Auth.register(user)
       .then(user => {
-        console.log('Logged user', user);
-        console.log('Dispatch event');
         dispatch({
           type: 'REG_USER',
           payload: {
@@ -65,8 +61,6 @@ export function logout() {
   return dispatch => {
     return Auth.logout()
       .then(response => {
-        console.log('Logout user', response);
-        console.log('Dispatch event');
         dispatch({
           type: 'USER_LOGOUT',
           payload: {
@@ -75,7 +69,6 @@ export function logout() {
           }
         });
       }, error => {
-        console.log('ERROR');
         dispatch({
           type: 'USER_LOGOUT',
           payload: {
