@@ -2,6 +2,8 @@ import React from 'react';
 import CommentList from '../comments-list/comments-list';
 import './index.css';
 import PropTypes from 'prop-types';
+import { store } from '../..//index';
+import { push } from 'react-router-redux';
 import { find } from 'lodash'
 
 class ItemDetails extends React.Component {
@@ -42,10 +44,18 @@ class ItemDetails extends React.Component {
     e.preventDefault();
   }
 
+  handleDelete = (e) => {
+    e.preventDefault();
+    if (confirm("Сигурни ли сте, че искате да изтриете учебния материал?") == true) {
+        this.props.actions.deleteItem(this.getItemIndex());
+        store.dispatch(push('/items'));
+    }
+  }
+
   render() {
     return(
       <div>
-        <div className="item-title">{this.getItem.title}</div>
+        <div className="item-title">{this.getItem().title}</div>
 
         <table className="item-details-table">
             <tbody>
@@ -83,6 +93,9 @@ class ItemDetails extends React.Component {
         {this.props.user && (this.props.user.role == 'Admin' || this.props.user._id == this.getItem().user._id) && <button onClick={this.handleEdit} className="edit-btn btn btn-primary">
           Edit
         </button>}
+        {this.props.user && (this.props.user.role == 'Admin' || this.props.user._id == this.getItem().user._id) && <button onClick={this.handleDelete} className="edit-btn btn btn-danger">
+          Delete
+        </button>}
         <br/>
         <h3 className="item-title">Коментари</h3>
         <CommentList comments={this.getItem().comments} actions={this.props.actions} user={this.props.user}/>
@@ -100,6 +113,7 @@ class ItemDetails extends React.Component {
 ItemDetails.propTypes = {
   actions: PropTypes.shape({
     getItems: PropTypes.func.isRequired,
+    deleteItem: PropTypes.func,
     addComment: PropTypes.func,
     deleteComment: PropTypes.func
   }),

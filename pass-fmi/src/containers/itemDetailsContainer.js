@@ -1,6 +1,6 @@
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { getItems } from '../actions/items';
+import { getItems, deleteItem } from '../actions/items';
 import ItemDetails from '../components/items/item-details';
 import { saveCommentToItem } from '../actions/items';
 import { addComment, deleteComment } from '../actions/comments';
@@ -14,7 +14,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators({ getItems, addComment, deleteComment }, dispatch)
+    actions: bindActionCreators({ getItems, deleteItem, addComment, deleteComment }, dispatch)
   };
 }
 
