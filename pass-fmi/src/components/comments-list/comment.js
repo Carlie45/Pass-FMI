@@ -15,7 +15,6 @@ class SingleComment extends React.Component {
 
   handleDelete = (e) => {
     e.preventDefault();
-    console.log(e.target.id)
     this.props.actions.deleteComment(this.getItemIndex(), e.target.id);
   }
 

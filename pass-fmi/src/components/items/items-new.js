@@ -17,9 +17,9 @@ class ItemsNew extends React.Component {
   }
 
   handleSubmit(event) {
-  this.props.actions.addItem(this.item);
-   event.preventDefault();
-   this.props.history.push('/items');
+    this.props.actions.addItem(this.item);
+    event.preventDefault();
+    this.props.history.push('/items');
   }
 
   handleClick(e) {

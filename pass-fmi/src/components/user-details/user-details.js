@@ -91,15 +91,11 @@ class UserDetails extends React.Component {
 
 UserDetails.propTypes = {
   actions: PropTypes.shape({
-//    getUsers: PropTypes.func.isRequired,
     getUser: PropTypes.func.isRequired,
     getItems: PropTypes.func.isRequired,
-//    getUserItemsIds: PropTypes.func.isRequired
   }),
-//    users: PropTypes.array,
     user: PropTypes.object,
     items: PropTypes.array.isRequired,
-//    userItemsIds: PropTypes.array
 }
 
 export default UserDetails;

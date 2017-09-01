@@ -3,15 +3,18 @@ const router = express.Router();
 
 const passport = require('passport');
 const User = require('../models/users');
-//
-// router.get('/', (req, res) => {
-//   newUser = new User({name:'Pesho'});
-//   newUser.save(function (err, ok) {
-//     if (err) return console.error(err);
-//     res.status(200).send('OK');
-//   });
-// });
-//
+const Joi = require('joi');
+
+const addUserSchema = Joi.object().keys({
+  username: Joi.string().alphanum().min(3).max(30).required(),
+  firstName: Joi.string().alphanum().min(3).max(30).required(),
+  lastName: Joi.string().alphanum().min(3).max(30).required(),
+  role: Joi.string().required(),
+  phone: Joi.number().integer(),
+  password: Joi.string().min(3).max(40).required(),
+  email: Joi.string().email()
+});
+
 router.get('/usersList', function(req, res) {
   User.find({}).then((users) => {
     res.status(200).json(users);
@@ -21,29 +24,39 @@ router.get('/usersList', function(req, res) {
   });
 });
 
- router.post('/', function(req, res) {
+router.post('/', function(req, res) {
+  const validation = Joi.validate({
+    username: req.body.username,
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
+    role: req.body.role,
+    phone: req.body.phone,
+    password: req.body.password,
+    email: req.body.email
+  }, addUserSchema);
+  if (validation.error) {
+    res.status(404).json({message: validation.error.details[0].message})
+    return;
+   }
+
    let user = new User();
 
-   console.log('Add user!');
-   console.log(req.body.username);
+  user.username = req.body.username;
+  user.firstName = req.body.firstName;
+  user.lastName = req.body.lastName;
+  user.role = req.body.role;
+  user.phone = req.body.phone;
+  user.password = req.body.password;
+  user.email = req.body.email;
 
-   user.username = req.body.username;
-   user.firstName = req.body.firstName;
-   user.lastName = req.body.lastName;
-   user.role = req.body.role;
-   user.phone = req.body.phone;
-   user.password = req.body.password;
-   user.email = req.body.email;
-   console.log(user);
+  user.save().then( user => {
+   res.status(200).json(user);
+  })
+  .catch(error => {
+   res.status(500).send(error);
+  });
 
-   user.save().then( user => {
-     res.status(200).json(user);
-   })
-   .catch(error => {
-     res.status(500).send(error);
-   });
-
- });
+});
 
 router.get('/:username', function(req, res) {
   User.findOne({username: req.params.username})
@@ -61,10 +74,21 @@ router.get('/:username', function(req, res) {
 });
 
 router.post('/register', function(req, res) {
-  let user = new User();
+  const validation = Joi.validate({
+    username: req.body.username,
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
+    role: req.body.role,
+    phone: req.body.phone,
+    password: req.body.password,
+    email: req.body.email
+  }, addUserSchema);
+  if (validation.error) {
+    res.status(404).json({message: validation.error.details[0].message})
+    return;
+  }
 
-  console.log('Add user!');
-  console.log(req.body.username);
+  let user = new User();
 
   user.username = req.body.username;
   user.firstName = req.body.firstName;
@@ -74,85 +98,35 @@ router.post('/register', function(req, res) {
   user.password = req.body.password;
   user.email = req.body.email;
   User.register(new User(user), req.body.password, function(err, user) {
-      console.log(err);
-      if (err) {
-        console.log('Error');
-        console.log(err);
-        res.statusCode = 500;
-        res.send(err);
-      }
+    if (err) {
+      res.statusCode = 500;
+      res.send(err);
+    }
 
-      passport.authenticate('local')(req, res, function (error) {
-        if(error) {
-          console.log(error);
-          res.statusCode = 500;
-          res.send('Error');
-        }
-        user = req.user;
-        // user.salt.delete();
-        user.salt = null;
-        user.hash = null;
-        res.status(200).send({user});
-      });
+    passport.authenticate('local')(req, res, function (error) {
+      if(error) {
+        res.statusCode = 500;
+        res.send('Error');
+      }
+      user = req.user;
+      user.salt = null;
+      user.hash = null;
+      res.status(200).send({user});
+    });
   });
 });
 
 router.post('/login', passport.authenticate('local'), function(req, res) {
-    console.log(req.user);
-    user = req.user;
-    // user.salt.delete();
-    user.salt = null;
-    user.hash = null;
-    res.status(200).send({user});
+  user = req.user;
+  user.salt = null;
+  user.hash = null;
+  res.status(200).send({user});
 });
 
 router.get('/logout', function(req, res) {
-    req.logout();
-    req.session = null;
-    res.status(200).send('OK');
+  req.logout();
+  req.session = null;
+  res.status(200).send('OK');
 });
-
-// router.post('/login', passport.authenticate('local'), function(req, res) {
-//
-// });
-//
-// router.get('/:id', (req, res) => {
-//   User.findOne({
-//       attributes: {
-//         exclude: ['passhash', 'salt']
-//       },
-//       where: {
-//         id: req.params.id
-//       }
-//     })
-//     .then((user) => {
-//       if (!user) {
-//         return res.sendStatus(404);
-//       }
-//       res.status(200).send(user);
-//     });
-// });
-//
-// router.post('/', authentication.register);
-//
-// router.put('/:id', (req, res) => {
-//   User.findById(req.params.id)
-//     .then((user) => {
-//       user.update(req.body)
-//         .then(
-//           (updatedUser) => {
-//             updatedUser = updatedUser.toJSON();
-//             delete updatedUser.passhash;
-//             delete updatedUser.salt;
-//             res.status(200).send(updatedUser);
-//           },
-//           (error) => {
-//             return res.sendStatus(409);
-//           });
-//     })
-//     .catch((error) => {
-//       return res.sendStatus(404);
-//     });
-// });
 
 module.exports = router;

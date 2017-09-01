@@ -5,6 +5,49 @@ const Item = require('../models/items');
 const Comment = require('../models/comments');
 const User = require('../models/users');
 const _ = require('lodash');
+const Joi = require('joi');
+
+const testSchema = Joi.object().keys({
+  user: Joi.string().alphanum().min(3).max(30).required(),
+  phone: Joi.number().integer(),
+  email: Joi.string().email()
+});
+
+const newItemSchema = Joi.object().keys({
+  user: Joi.string().alphanum().min(3).max(30).required(),
+  subject: Joi.string().required(),
+  department: Joi.string().required(),
+  title: Joi.string().min(3).max(30).required(),
+  price: Joi.number().precision(2).required()
+});
+
+const editItemSchema = Joi.object().keys({
+  user: Joi.object().required(),
+  subject: Joi.string().required(),
+  department: Joi.string().required(),
+  title: Joi.string().min(3).max(30).required(),
+  price: Joi.number().precision(2).required()
+});
+
+const newCommentSchema = Joi.object().keys({
+  author: Joi.object().required(),
+  content: Joi.string().required(),
+});
+
+router.post('/test', function(req, res) {
+  let object = {};
+  object.user = req.body.user;
+  object.email = req.body.email;
+  object.phone = req.body.phone;
+  const result = Joi.validate(object, testSchema);
+
+  if (result.error) {
+    res.status(404).json({message: result.error.details[0].message})
+    return;
+  }
+  res.status(200).json(result);
+  return;
+});
 
 router.get('/itemsList', function(req, res) {
   Item.find().deepPopulate('user comments.author').exec(function (err, items) {
@@ -36,6 +79,13 @@ router.post('/', function(req, res) {
   item.department = req.body.department;
   item.title = req.body.title;
   item.price = req.body.price;
+
+  const validation = Joi.validate(item, newItemSchema);
+  if (validation.error) {
+    res.status(404).json({message: validation.error.details[0].message})
+    return;
+  }
+
   item.comments = [];
 
   Item.create(item).then(item => {
@@ -83,6 +133,12 @@ router.post('/addComment/:itemId', function(req, res) {
     comment.author = user._id;
     comment.content = req.body.content;
 
+    const validation = Joi.validate(comment, newCommentSchema);
+    if (validation.error) {
+      res.status(404).json({message: validation.error.details[0].message})
+      return;
+    }
+
     Item.findById(req.params.itemId).then((item) => {
       Comment.create(comment).then(comment => {
         item.comments = item.comments.concat(comment._id)
@@ -115,6 +171,12 @@ router.put('/:id', function(req,res) {
     item.title = req.body.title;
     item.department = req.body.department;
 
+    const validation = Joi.validate(item, editItemSchema);
+    if (validation.error) {
+      res.status(404).json({message: validation.error.details[0].message})
+      return;
+    }
+
     Item.update({_id: item._id}, item).then((updateResponse) => {
       Item.findById({_id: item._id}).deepPopulate('user comments.author').exec(function (err, item) {
         if(item) {
@@ -132,8 +194,14 @@ router.put('/:id', function(req,res) {
 
 router.delete('/deleteComment/:itemId/:commentId', function(req, res) {
   var commentId = parseInt(req.params.commentId);
+  var itemId = req.params.itemId
 
-  Item.findById(req.params.itemId).then((item) => {
+  if (!commentId || !itemId) {
+    res.status(404).json({message: 'Pass correct item id and comment id'})
+    return;
+  }
+
+  Item.findById(itemId).then((item) => {
       Comment.deleteOne({ _id: commentId}).then(result => {
         item.comments = _.without(item.comments, commentId);
 
@@ -161,7 +229,7 @@ router.get('/:id', function(req, res) {
       res.status(200).json(item);
     }
     else {
-      res.status(404).send('Item not found!');
+      res.status(404).send({message: 'Item not found!'});
     }
   });
 });

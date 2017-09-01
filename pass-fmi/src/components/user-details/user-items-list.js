@@ -7,9 +7,9 @@ class UserItemsList extends React.Component {
   render() {
     return (
       <tbody>{
-            this.props.items.map(
-              item => (item.user.username === this.props.username && <UserItem key={item._id} item={item} />)
-            )}
+          this.props.items.map(
+            item => (item.user.username === this.props.username && <UserItem key={item._id} item={item} />)
+          )}
       </tbody>
     );
   }
