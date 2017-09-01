@@ -15,7 +15,7 @@ class ItemDetails extends React.Component {
             items: this.props.items
         }
     }
-    
+
     getItemIndex = () => {
         let endInd = window.location.href.lastIndexOf('/');
         return window.location.href.substring(endInd+1);
@@ -32,8 +32,8 @@ class ItemDetails extends React.Component {
 
     handleAddComment = (e) => {
         e.preventDefault();
-
-        this.props.actions.addComment(this.props.items[this.getItemIndex()]._id, "lili", this.state.newCommentText);
+        // Add logged user username
+        this.props.actions.addComment(this.props.items[this.getItemIndex()]._id, "dani", this.state.newCommentText);
         this.setState({newCommentText: 'Добавете коментар...'});
     }
 
