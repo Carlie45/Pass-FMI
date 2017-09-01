@@ -25,6 +25,21 @@ export function addItem(item) {
   }
 }
 
+export function deleteItem(itemId) {
+  return dispatch => {
+    axios.delete('/api/items/deleteItem/' + itemId)
+    .then(response => {
+      dispatch({
+        type: 'DELETE_ITEM_SUCCESS',
+        payload: {
+          item: response.data
+        }
+      })
+    })
+    .catch(() => dispatch({type: 'DELETE_ITEM_ERROR'}))
+  }
+}
+
 export function filterBySubject(subject) {
   return dispatch => {
     dispatch({

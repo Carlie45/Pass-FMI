@@ -92,7 +92,7 @@ class UserDetails extends React.Component {
 UserDetails.propTypes = {
   actions: PropTypes.shape({
     getUser: PropTypes.func.isRequired,
-    getItems: PropTypes.func.isRequired,
+    getItems: PropTypes.func.isRequired
   }),
     user: PropTypes.object,
     items: PropTypes.array.isRequired,

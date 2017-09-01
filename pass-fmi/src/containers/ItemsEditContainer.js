@@ -12,7 +12,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators({ editItem }, dispatch)
+    actions: bindActionCreators({ editItem}, dispatch)
   };
 }
 

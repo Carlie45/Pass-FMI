@@ -8,6 +8,14 @@ export default function items(state = [], action) {
       const {item} = action.payload;
 
       return [...state, item];
+    case 'DELETE_ITEM_SUCCESS': {
+      const index = findIndex(state, function(item){ return item._id == action.item._id });
+
+      return [
+       ...state.slice(0, index),
+       ...state.slice(index+1) 
+      ]
+    }
     case 'UPDATE_ITEM_SUCCESS':
       const index = findIndex(state, function(item){ return item._id == action.item._id });
 

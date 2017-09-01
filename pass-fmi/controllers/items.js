@@ -96,6 +96,15 @@ router.post('/', function(req, res) {
   });
 });
 
+router.delete('/deleteItem/:itemId', function(req, res) {
+  Item.findByIdAndRemove(req.params.itemId, function(err, item) {
+    if (item) {
+      res.status(200).json(item);
+    } else {
+      res.status(500).send(err);
+    }
+  })
+});
 
 router.get('/departments',function(req, res){
   Item.find().distinct('department', {}).then(departments => {
