@@ -10,7 +10,7 @@ import createBrowserHistory from 'history/createBrowserHistory'
 import BaseTemplate from './containers/BaseContainer';
 import Home from './containers/HomeContainer';
 import About from './components/about/about';
-import UserData from './components/personal/personal';
+import Personal from './containers/PersonalContainer';
 import Items from './containers/ItemsContainer';
 import ItemsNew from './containers/ItemsNewContainer';
 import ItemDetails from './containers/itemDetailsContainer';
@@ -37,7 +37,7 @@ class App extends Component {
         <Route path="/" component={BaseTemplate} />
         <Route path="/home" component={Home} />
         <Route path="/about" component={About} />
-        <Route path="/personal" component={UserData} />
+        <Route path="/personal" component={Personal} />
         <Route path="/items" exact component={Items} />
         <Route path="/items-new" exact component={ItemsNew} />
         <Route path="/items-edit/:itemId" exact component={ItemsEdit} />

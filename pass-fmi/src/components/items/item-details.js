@@ -6,7 +6,7 @@ import { find } from 'lodash'
 
 class ItemDetails extends React.Component {
   componentWillMount() {
-    if(this.props.items == []) {
+    if(this.props.items.length == 0) {
       this.props.actions.getItems();
     }
   }

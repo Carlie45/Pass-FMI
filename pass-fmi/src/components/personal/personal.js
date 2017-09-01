@@ -1,21 +1,43 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
-import { connect } from 'react-redux';
+import ItemsList from '../items-list/items-list';
 import './index.css';
 
-const UserData = (props) => {
-  return (
-    <div>
-      <p className="paragraph-body">Име: {props.match.params.firstName}</p>
-      <p className="paragraph-body">Фамилия: {props.match.params.lastName}</p>
-      <p className="paragraph-body">e-mail: {props.match.params.email}</p>
-      <h4 className="paragraph-title">Качени обяви за учебни материали: {props.match.params.ownItems}</h4>
-    </div>
-  );
+class Personal extends React.Component {
+  componentWillMount() {
+    if(this.props.items.length == 0) {
+      this.props.actions.getItems();
+    }
+  }
+
+  getOwnedItems = () => {
+    return this.props.items.filter((item) => item.user._id === this.props.user._id);
+  }
+
+  render() {
+    return (
+      <div className="personal">
+        <div className="personal-info">
+          <p className="paragraph-body"><strong>Име:</strong> {this.props.user.firstName}</p>
+          <p className="paragraph-body"><strong>Фамилия:</strong> {this.props.user.lastName}</p>
+          <p className="paragraph-body"><strong>E-mail:</strong> {this.props.user.email}</p>
+          <p className="paragraph-body"><strong>Username:</strong> {this.props.user.username}</p>
+        </div>
+        <h2>Моите учебни материали</h2>
+        <table className="personal-items">
+          <ItemsList items={this.getOwnedItems()} />
+        </table>
+      </div>
+    );
+  }
 }
 
-UserData.propTypes = {
-  params: PropTypes.object
+Personal.propTypes = {
+  actions: PropTypes.shape({
+    getItems: PropTypes.func.isRequired
+  }),
+  user: PropTypes.object,
+  items: PropTypes.array
 }
 
-export default connect()(UserData);
+export default Personal
