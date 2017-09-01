@@ -4,9 +4,21 @@ const router = express.Router();
 const Item = require('../models/items');
 const Comment = require('../models/comments');
 const User = require('../models/users');
+const _ = require('lodash');
 
 router.get('/itemsList', function(req, res) {
   Item.find().deepPopulate('user comments.author').exec(function (err, items) {
+    if(items) {
+      res.status(200).json(items);
+    }
+    else {
+      res.status(404).send('Items not found!');
+    }
+  });
+});
+
+router.get('/itemsList/:username', function(req, res) {
+    Item.find({}, {sort: [['user.username', req.params.username]]}).deepPopulate('user comments.author').exec(function (err, items) {
     if(items) {
       res.status(200).json(items);
     }
@@ -116,7 +128,32 @@ router.put('/:id', function(req,res) {
       res.status(404).send(error);
     })
   })
-})
+});
+
+router.delete('/deleteComment/:itemId/:commentId', function(req, res) {
+  var commentId = parseInt(req.params.commentId);
+
+  Item.findById(req.params.itemId).then((item) => {
+      Comment.deleteOne({ _id: commentId}).then(result => {
+        item.comments = _.without(item.comments, commentId);
+
+        Item.update({_id: item._id}, item).then((updatedItem) => {
+          Item.findById({_id: item._id}).deepPopulate('user comments.author').exec(function (err, item) {
+            if(item) {
+              res.status(200).json(item);
+            }
+            else {
+              res.status(404).send('Item not found!');
+            }
+          });
+        }).catch((error) => {
+          res.status(404).send(error);
+        })
+      })
+    }).catch(() => {
+      res.status(404).send('Item doesn\'t exist');
+    })
+});
 
 router.get('/:id', function(req, res) {
   Item.findById({_id: req.params.id}).deepPopulate('user comments.author').exec(function (err, item) {

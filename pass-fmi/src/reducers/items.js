@@ -33,8 +33,19 @@ export default function items(state = [], action) {
       const title = action.payload.title;
       return filter(state, function(item) { return includes(item.title, title) });
 
-    case 'GET_ITEMS_ERROR':
+    case 'ADD_COMMENT_SUCCESS': {
+      const index = findIndex(state, function(item) {return item._id == action.item._id});
+      return [...state.slice(0, index), action.item, ...state.slice(index+1)]
+    }
+    case 'DELETE_COMMENT_SUCCESS': {
+      const index = findIndex(state, function(item) {return item._id == action.item._id});
+      return [...state.slice(0, index), action.item, ...state.slice(index+1)]
+    }
+
     case 'ADD_ITEM_ERROR':
+    case 'GET_ITEMS_ERROR':
+    case 'ADD_COMMENT_ERROR':
+    case 'DELETE_COMMENT_ERROR':
     default:
       return state;
   }

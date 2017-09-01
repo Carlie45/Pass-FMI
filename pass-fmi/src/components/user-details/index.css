@@ -1,0 +1,9 @@
+.user-items-table {
+    padding: 20px;
+    width: 50%;
+    font-size: 20px;
+}
+
+.user-item-col {
+    width: 25%;
+}

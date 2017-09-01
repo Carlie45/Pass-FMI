@@ -10,14 +10,15 @@ class Users extends React.Component {
 
   render() {
     return (
-      <div className="container">
+      <div id="users" className="users">
         <h3>Потребители</h3>
-        <table className="items-table">
+        <table className="users-table">
             <thead>
             <tr>
-                <th className="items-header">Потребителско име</th>
-                <th className="items-header">Първо име</th>
-                <th className="items-header">Фамилия</th>
+                <th className="users-header">Потребителско име</th>
+                <th className="users-header">Първо име</th>
+                <th className="users-header">Фамилия</th>
+                <th className="users-header">E-mail</th>
             </tr>
             </thead>
             <UsersList users={this.props.users} />

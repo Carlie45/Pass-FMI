@@ -20,30 +20,30 @@ router.get('/usersList', function(req, res) {
     res.status(500).send(error);
   });
 });
-//
-// router.post('/', function(req, res) {
-//   let user = new User();
-//
-//   console.log('Add user!');
-//   console.log(req.body.username);
-//
-//   user.username = req.body.username;
-//   user.firstName = req.body.firstName;
-//   user.lastName = req.body.lastName;
-//   user.role = req.body.role;
-//   user.phone = req.body.phone;
-//   user.password = req.body.password;
-//   user.email = req.body.email;
-//   console.log(user);
-//
-//   user.save().then( user => {
-//     res.status(200).json(user);
-//   })
-//   .catch(error => {
-//     res.status(500).send(error);
-//   });
-//
-// });
+
+ router.post('/', function(req, res) {
+   let user = new User();
+
+   console.log('Add user!');
+   console.log(req.body.username);
+
+   user.username = req.body.username;
+   user.firstName = req.body.firstName;
+   user.lastName = req.body.lastName;
+   user.role = req.body.role;
+   user.phone = req.body.phone;
+   user.password = req.body.password;
+   user.email = req.body.email;
+   console.log(user);
+
+   user.save().then( user => {
+     res.status(200).json(user);
+   })
+   .catch(error => {
+     res.status(500).send(error);
+   });
+
+ });
 
 router.get('/:username', function(req, res) {
   User.findOne({username: req.params.username})

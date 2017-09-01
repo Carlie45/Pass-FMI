@@ -33,18 +33,9 @@ class ItemDetails extends React.Component {
 
   handleAddComment = (e) => {
       e.preventDefault();
-      const date = new Date();
-      const day = date.getDate();
-      const month = date.getMonth()+1;
-      const year = date.getFullYear();
-      const hours = date.getHours();
-      const minutes = date.getMinutes();
-      const seconds = date.getSeconds();
-      let dateStr = day + "." + month + "." + year + " " + hours + ":" + minutes + ":" + seconds;
-      let newComment = {date: dateStr, username: "Guest", text: this.state.newCommentText};
-      this.getItem().comments.push(newComment);
-
-      this.setState({newComment: this.state.newCommentText});
+      // Add logged user username
+      this.props.actions.addComment(this.getItem()._id, "dani", this.state.newCommentText);
+      this.setState({newCommentText: 'Добавете коментар...'});
   }
 
   handleEdit = (e) => {
@@ -95,7 +86,7 @@ class ItemDetails extends React.Component {
         </button>}
         <br/>
         <h3 className="item-title">Коментари</h3>
-        <CommentList comments={this.getItem().comments}/>
+        <CommentList comments={this.getItem().comments} actions={this.props.actions}/>
         {this.props.user && <div className="add-comment-section">
             <textarea className="add-comment-textarea" name="add-comment-area" onChange={this.handleChange} form="add-comments-form" value={this.state.newCommentText}></textarea>
             <form id="add-comments-form" onSubmit={this.handleAddComment}>
@@ -109,7 +100,9 @@ class ItemDetails extends React.Component {
 
 ItemDetails.propTypes = {
   actions: PropTypes.shape({
-    getItems: PropTypes.func.isRequired
+    getItems: PropTypes.func.isRequired,
+    addComment: PropTypes.func,
+    deleteComment: PropTypes.func
   }),
   items: PropTypes.array
 }
